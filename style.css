@@ -150,6 +150,75 @@ main {
   animation: scrollPulse 2s ease-in-out infinite;
 }
 
+/* ── Sigil ──────────────────────────────────── */
+.sigil {
+  position: fixed;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 100;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.5rem 0.95rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-decoration: none;
+  background: var(--bg-card);
+  border: 1px solid var(--bg-card-border);
+  border-radius: 999px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: var(--card-shadow);
+  color: var(--text-muted);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.3s ease;
+}
+
+.sigil:hover {
+  border-color: var(--gold-glow);
+  box-shadow: 0 0 24px var(--gold-glow), var(--card-shadow);
+  transform: translateY(-1px);
+}
+
+.sigil-mark {
+  font-size: 1rem;
+  background: linear-gradient(135deg, var(--accent), var(--violet) 50%, var(--gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: sigilShimmer 4s ease-in-out infinite;
+}
+
+.sigil-name {
+  color: var(--gold);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.sigil-realm {
+  color: var(--violet);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.6rem;
+  opacity: 0.85;
+  padding-left: 0.45rem;
+  border-left: 1px solid var(--bg-card-border);
+}
+
+@keyframes sigilShimmer {
+  0%, 100% { filter: brightness(1) drop-shadow(0 0 4px var(--violet-glow)); }
+  50% { filter: brightness(1.3) drop-shadow(0 0 10px var(--gold-glow)); }
+}
+
+@media (max-width: 600px) {
+  .sigil {
+    top: 0.75rem;
+    right: 0.75rem;
+    font-size: 0.65rem;
+    padding: 0.4rem 0.7rem;
+  }
+  .sigil-realm { display: none; }
+}
+
 /* ── Prologue ───────────────────────────────── */
 .prologue {
   max-width: 640px;

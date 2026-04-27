@@ -13,9 +13,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <meta name="realm-version" content='{"name": "67-days", "description": "67 Days \u2014 JP interactive build streak timeline", "version": "Celestial Monolith \u00b7 100d8aa", "hash": "100d8aa", "branch": "main", "dirty": true, "built": "2026-04-27T00:53:13Z", "realm": "fantasy", "repo": "https://github.com/jphein/jp", "commit_url": "https://github.com/jphein/jp/commit/100d8aa"}'>
 </head>
 <body>
   <canvas id="bg" aria-hidden="true"></canvas>
+
+  <a class="sigil" id="sigil" target="_blank" rel="noopener" aria-label="Realm sigil — version stamp">
+    <span class="sigil-mark">✦</span>
+    <span class="sigil-name"></span>
+    <span class="sigil-realm"></span>
+  </a>
 
   <main>
     <!-- Hero -->
@@ -321,5 +328,19 @@
   }
   </script>
   <script type="module" src="scene.js"></script>
+  <script>
+    (function bindSigil() {
+      const meta = document.querySelector('meta[name="realm-version"]');
+      const sigil = document.getElementById('sigil');
+      if (!meta || !sigil) return;
+      try {
+        const v = JSON.parse(meta.getAttribute('content'));
+        sigil.querySelector('.sigil-name').textContent = (v.version || '').split(' · ')[0];
+        sigil.querySelector('.sigil-realm').textContent = v.realm || '';
+        if (v.commit_url) sigil.href = v.commit_url;
+        sigil.title = `${v.version} · built ${v.built}`;
+      } catch (e) {}
+    })();
+  </script>
 </body>
 </html>
